@@ -1,7 +1,8 @@
 import { Box, Container } from "@mui/material";
 
-import { Footer } from "../components";
 import PropTypes from "prop-types";
+
+import { Footer } from "../components/Footer";
 
 const DefaultLayout = ({ children }) => {
   return (
@@ -19,5 +20,5 @@ const DefaultLayout = ({ children }) => {
 export default DefaultLayout;
 
 DefaultLayout.propTypes = {
-  children: PropTypes.any
+  children: PropTypes.any.isRequired,
 };

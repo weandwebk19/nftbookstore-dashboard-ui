@@ -9,7 +9,6 @@
 // });
 // export default instance;
 import axios from "axios";
-import jwt_decode from "jwt-decode";
 
 import config from "../config";
 import TokenService from "./tokenService";
