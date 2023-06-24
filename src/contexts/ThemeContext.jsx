@@ -2,10 +2,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { ThemeProvider } from "@mui/material/styles";
 
-import { darkTheme, lightTheme } from "@styles/theme";
-
-import useLocalStorage from "@hooks/useLocalStorage";
 import PropTypes from "prop-types";
+
+import useLocalStorage from "../hooks/useLocalStorage";
+import { darkTheme, lightTheme } from "../styles/theme";
 
 export function useMyTheme() {
   return useLocalStorage("theme", "light");
@@ -35,7 +35,7 @@ const handleMyThemeChange = (theme) => {
   }
 };
 
-export function MyThemeContextProvider({ children }) {
+export const MyThemeContextProvider = ({ children }) => {
   const [theme, setTheme] = useMyTheme();
   const [clientTheme, setClientTheme] = useState(lightTheme);
 
@@ -50,8 +50,8 @@ export function MyThemeContextProvider({ children }) {
       </SetMyThemeContext.Provider>
     </ThemeProvider>
   );
-}
+};
 
 MyThemeContextProvider.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };

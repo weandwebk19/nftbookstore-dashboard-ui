@@ -9,13 +9,12 @@ import {
   Container,
   CssBaseline,
   Grid,
-  Link,
   Paper,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 
-import { login } from "@/redux/actions/auth";
+import { login } from "../../../redux/actions/auth";
 
 // import GoogleAuthButton from "./GoogleAuthButton";
 
@@ -28,7 +27,7 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
     try {
@@ -61,7 +60,7 @@ const LoginForm = () => {
     <Box
       sx={{
         position: "relative",
-        overflow: "hidden"
+        overflow: "hidden",
       }}
     >
       <Container
@@ -72,7 +71,7 @@ const LoginForm = () => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          minHeight: "100vh"
+          minHeight: "100vh",
         }}
       >
         <CssBaseline />
@@ -80,7 +79,7 @@ const LoginForm = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            p: 3
+            p: 3,
           }}
         >
           <Typography variant="h3" gutterBottom>
@@ -104,7 +103,7 @@ const LoginForm = () => {
                   name="username"
                   autoComplete="username"
                   {...register("username", {
-                    required: "required"
+                    required: "required",
                     // validate: (value) => value !== "admin" || "nice try!",
                   })}
                 />
@@ -115,7 +114,7 @@ const LoginForm = () => {
                         style={{
                           color: "darkred",
                           fontSize: "0.88rem",
-                          position: "absolute"
+                          position: "absolute",
                         }}
                       >
                         {errors.username.message}
@@ -148,7 +147,7 @@ const LoginForm = () => {
                   id="password"
                   autoComplete="new-password"
                   {...register("password", {
-                    required: "required"
+                    required: "required",
                   })}
                 />
                 <Grid container justifyContent="space-between">
@@ -158,7 +157,7 @@ const LoginForm = () => {
                         style={{
                           color: "darkred",
                           fontSize: "0.88rem",
-                          position: "absolute"
+                          position: "absolute",
                         }}
                       >
                         {errors.password.message}

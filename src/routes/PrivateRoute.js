@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 import PropTypes from "prop-types";
-import AuthService from "services/authService";
+
+import AuthService from "../services/authService";
 
 const PrivateRoute = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState();
