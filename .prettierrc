@@ -1,0 +1,14 @@
+{
+  "importOrder": [
+    "^react(.*)$",
+    "mui/material(.*)",
+    "mui/icon(.*)",
+    "<THIRD_PARTY_MODULES>",
+    "^components/(.*)",
+    "@/(.*)",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "endOfLine": "auto"
+}

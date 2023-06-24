@@ -1,0 +1,208 @@
+@import "./mixins";
+@import "./variables";
+@include scrollbars(0.5em);
+
+html {
+  // font-size: 62.5%;
+}
+
+body {
+  background-color: $white !important;
+  // min-height: 100vh;
+  height: 100%;
+
+  // Hide scrollbar
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  transition: 0.3s cubic-bezier(0.4, 0.4, 0, 1);
+}
+
+a,
+abbr,
+address,
+article,
+aside,
+audio,
+b,
+blockquote,
+body,
+button,
+canvas,
+caption,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+input,
+ins,
+kbd,
+label,
+legend,
+li,
+main,
+mark,
+menu,
+nav,
+object,
+ol,
+p,
+pre,
+q,
+samp,
+section,
+select,
+small,
+span,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+textarea,
+tfoot,
+th,
+thead,
+time,
+tr,
+ul,
+var,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  line-height: 1;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  transition: 0.3s cubic-bezier(0.4, 0.4, 0, 1);
+  // word-spacing: 1px;
+  -webkit-backface-visibility: hidden;
+}
+
+div.MuiTooltip-popper {
+  list-style: none;
+  line-height: 1;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  transition: none !important;
+  // word-spacing: 1px;
+  -webkit-backface-visibility: hidden;
+}
+
+.hide-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.text-stroke {
+  // text-shadow: -1px -1px 0 $white, 1px -1px 0 $white, -1px 1px 0 $white,
+  //   1px 1px 0 $white;
+  text-shadow: 0px 1px 8px $white, 0px -1px 8px $white;
+}
+
+.avatar-menu {
+  height: 100%;
+  margin-top: 10px !important;
+}
+
+.text-limit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+
+  &--2-lines {
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-clamp: 2;
+  }
+  &--3-lines {
+    -webkit-line-clamp: 3; /* number of lines to show */
+    line-clamp: 3;
+  }
+}
+
+.button-group {
+  @include smalldesktop {
+    margin: 16px 0;
+    justify-content: space-between !important;
+    width: 100% !important;
+  }
+
+  @include tablet {
+    margin: 16px 0;
+    justify-content: space-between !important;
+    width: 100% !important;
+  }
+  @include mobile {
+    margin: 16px 0;
+    justify-content: space-between !important;
+    width: 100% !important;
+  }
+}
+
+.responsive-button span {
+  @include tablet {
+    display: none;
+  }
+}
+
+div.box-zoom-out {
+  transition: 0.2s;
+  &__main-content {
+    transition: none;
+  }
+  &:hover {
+    .MuiIconButton-root .MuiSvgIcon-root {
+      transition: 0.2s;
+      color: $white;
+    }
+
+    background-color: #344443;
+    color: $white;
+    .box-zoom-out__img {
+      -webkit-transform: scale(1.2);
+      transform: scale(1.2);
+    }
+  }
+}
+
+p.box-zoom-out__content-chips {
+  transition: none;
+}
+
+#side-area {
+  &--fixed {
+    @include mobile {
+      position: sticky;
+    }
+  }
+}
