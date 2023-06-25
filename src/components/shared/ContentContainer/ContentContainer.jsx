@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Box, Stack, Typography } from "@mui/material";
 
-import styles from "../../../styles/ContentContainer.module.scss";
+import decoLine from "assets/deco-line.svg";
 
-// import images from "@/assets/images";
+import styles from "../../../styles/ContentContainer.module.scss";
 
 const ContentContainer = (props) => {
   const { titles = [], children, button, width } = props;
@@ -36,15 +36,15 @@ const ContentContainer = (props) => {
               {title}
             </Typography>
           ))}
-          {/* <Box
+          <Box
             component="img"
-            src={images.decoLine}
+            src={decoLine}
             sx={{
               position: "absolute",
               maxWidth: "385px",
-              transform: "translateX(-50%) translateY(-40%)"
+              transform: "translateX(-50%) translateY(-40%)",
             }}
-          /> */}
+          />
         </Box>
         {button && <Box sx={{ width: "100%", textAlign: "end" }}>{button}</Box>}
       </Box>

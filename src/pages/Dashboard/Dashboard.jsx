@@ -35,7 +35,6 @@ const Dashboard = () => {
   const [isLoading] = useState(false);
 
   return (
-    // <div>123{isLoading}</div>
     <ContentContainer titles={["Dashboard"]}>
       <Grid container columns={{ xs: 4, sm: 8, md: 12, lg: 12 }}>
         <Paper sx={{ p: 3, width: "100%" }}>

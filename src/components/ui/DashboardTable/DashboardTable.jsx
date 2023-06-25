@@ -12,12 +12,14 @@ import {
   Typography,
 } from "@mui/material";
 
-import { PhotoCamera } from "@mui/icons-material";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 
-import { DataGrid } from "@mui/x-data-grid";
+// import { DataGrid } from "@mui/x-data-grid";
+import { StyledButton } from "styles/components/Button";
+
+import DataGrid from "components/shared/DataGrid/DataGrid";
 
 import styles from "../../../styles/Dashboard.module.scss";
 import { truncate } from "../../../utils/truncate";
@@ -201,45 +203,7 @@ const DashboardTable = ({ data = [] }) => {
 
   return (
     <Stack spacing={3}>
-      <Box
-        sx={{
-          width: "100%",
-          "& .MuiDataGrid-columnHeaders": {
-            height: "50px",
-          },
-          "& .MuiDataGrid-columnSeparator": {
-            display: "none",
-          },
-          "& .MuiDataGrid-columnHeaderTitle": {
-            lineHeight: "1.5 !important",
-            fontWeight: "bold",
-          },
-          "& .MuiDataGrid-cell:focus": {
-            outline: "none !important",
-          },
-          "& .MuiDataGrid-cell:focus-within": {
-            outline: "none !important",
-          },
-        }}
-      >
-        <DataGrid
-          getRowId={(row) => row.tokenId}
-          columns={columns}
-          rows={data}
-          autoHeight
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 10,
-              },
-            },
-          }}
-          pageSizeOptions={[10]}
-          checkboxSelection
-          disableRowSelectionOnClick
-          getRowHeight={() => "auto"}
-        />
-      </Box>
+      <DataGrid getRowId={(row) => row.tokenId} columns={columns} rows={data} />
       <Dialog
         title="Accept the request"
         open={openAcceptDialog}
@@ -292,15 +256,15 @@ const DashboardTable = ({ data = [] }) => {
             </Typography>
           </Stack>
           <Stack direction="row" spacing={3} justifyContent="end">
-            <Button
+            <StyledButton
               customVariant="secondary"
               onClick={(e) => handleCancelAcceptClick(e)}
             >
               Cancel
-            </Button>
-            <Button onClick={(e) => handleAcceptClick(e, targetItem)}>
+            </StyledButton>
+            <StyledButton onClick={(e) => handleAcceptClick(e, targetItem)}>
               Accept
-            </Button>
+            </StyledButton>
           </Stack>
         </Stack>
       </Dialog>
@@ -356,15 +320,15 @@ const DashboardTable = ({ data = [] }) => {
             </Typography>
           </Stack>
           <Stack direction="row" spacing={3} justifyContent="end">
-            <Button
+            <StyledButton
               customVariant="secondary"
               onClick={(e) => handleCancelRefuseClick(e)}
             >
               Cancel
-            </Button>
-            <Button onClick={(e) => handleRefuseClick(e, targetItem)}>
+            </StyledButton>
+            <StyledButton onClick={(e) => handleRefuseClick(e, targetItem)}>
               Refuse
-            </Button>
+            </StyledButton>
           </Stack>
         </Stack>
       </Dialog>
