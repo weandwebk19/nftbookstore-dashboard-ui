@@ -1,1 +1,3 @@
-export { default } from "../../../components/ui/Login/LoginForm";
+import Login from "components/ui/login/LoginForm";
+
+export default Login;

@@ -1,6 +1,7 @@
+import Login from "pages/Auth/login";
+import Dashboard from "pages/Dashboard/Dashboard";
+
 import Confirmation from "../pages/Auth/confirmation";
-import Login from "../pages/Auth/login";
-import Dashboard from "../pages/Dashboard";
 
 // import Register from "../pages/Auth/register";
 // import ResetPassword from "../pages/Auth/reset-password";

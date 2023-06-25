@@ -1,18 +1,9 @@
-import {
-  Box,
-  DialogTitle,
-  IconButton,
-  Typography,
-  Dialog as MUIDialog
-} from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
 
 import PropTypes from "prop-types";
-// import {
-//   StyledDialog,
-//   StyledDialogTitle
-// } from "../../../styles/components/Dialog";
+import { StyledDialog, StyledDialogTitle } from "styles/components/Dialog";
 
 const Dialog = ({ title, dialogSize, selfClose, onClose, open, children }) => {
   const handleClose = () => {
@@ -20,21 +11,21 @@ const Dialog = ({ title, dialogSize, selfClose, onClose, open, children }) => {
   };
 
   return (
-    <MUIDialog
+    <StyledDialog
       open={open}
       onClose={handleClose}
       maxWidth={dialogSize}
       fullWidth
       disableScrollLock={true}
     >
-      <DialogTitle>
+      <StyledDialogTitle>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="h4">{title}</Typography>
           <IconButton aria-label="close" onClick={handleClose}>
             <CloseIcon fontSize="inherit" />
           </IconButton>
         </Box>
-      </DialogTitle>
+      </StyledDialogTitle>
       {selfClose ? (
         <Box sx={{ p: 3 }} onClick={handleClose}>
           {children}
@@ -42,7 +33,7 @@ const Dialog = ({ title, dialogSize, selfClose, onClose, open, children }) => {
       ) : (
         <Box sx={{ p: 3 }}>{children}</Box>
       )}
-    </MUIDialog>
+    </StyledDialog>
   );
 };
 
@@ -52,13 +43,13 @@ Dialog.propTypes = {
   dialogSize: PropTypes.string,
   selfClose: PropTypes.bool,
   open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
 };
 
 Dialog.defaultProps = {
   title: "",
   dialogSize: "md",
-  selfClose: false
+  selfClose: false,
 };
 
 export default Dialog;
