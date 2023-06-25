@@ -1,14 +1,6 @@
-// import axios from "axios";
-// import config from "../config";
-// const instance = axios.create({
-//   withCredentials: true,
-//   baseURL: `${config.SERVER_URL}`,
-//   // headers: {
-//   //   "Content-Type": "application/json",
-//   // },
-// });
-// export default instance;
 import axios from "axios";
+import jwt_decode from "jwt-decode";
+import { toCamel } from "utils/nomalizer";
 
 import config from "../config";
 import TokenService from "./tokenService";
@@ -74,6 +66,27 @@ export const createAxiosJWT = () => {
     },
     (err) => {
       return Promise.reject(err);
+    }
+  );
+
+  newInstance.interceptors.response.use(
+    (response) => {
+      const res = toCamel(response);
+      return res;
+    },
+    (error) => {
+      if (error.response?.status === 401) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("persist:main-root");
+        /* eslint-disable no-return-assign */
+        return (window.location.href = "/login");
+      }
+      if (error.response?.status === 403) {
+        /* eslint-disable no-return-assign */
+        return (window.location.href = "/403");
+      }
+
+      return Promise.reject(error);
     }
   );
   return newInstance;
