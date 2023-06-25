@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Box, CircularProgress, Grid, Paper } from "@mui/material";
+
+import BookTempService from "services/bookTempService";
 
 import { ContentContainer } from "../../components/shared/ContentContainer";
 import { DashboardTable } from "../../components/ui/DashboardTable";
@@ -32,10 +34,18 @@ const Dashboard = () => {
       timestamp: new Date("2023-06-20T06:22:36.732Z").getTime(),
     },
   ];
-  const [isLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const bookRes = await BookTempService.getListBookTemps();
+      setBooks(bookRes);
+      setIsLoading(false);
+    })();
+  }, []);
 
   return (
-    // <div>123{isLoading}</div>
     <ContentContainer titles={["Dashboard"]}>
       <Grid container columns={{ xs: 4, sm: 8, md: 12, lg: 12 }}>
         <Paper sx={{ p: 3, width: "100%" }}>
@@ -54,7 +64,7 @@ const Dashboard = () => {
                 </Box>
               );
             }
-            return <DashboardTable data={data} />;
+            return <DashboardTable data={books} />;
           })()}
         </Paper>
       </Grid>
