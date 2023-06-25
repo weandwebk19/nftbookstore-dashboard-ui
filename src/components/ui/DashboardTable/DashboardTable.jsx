@@ -16,6 +16,7 @@ import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 
+import BookTempService from "services/bookTempService";
 // import { DataGrid } from "@mui/x-data-grid";
 import { StyledButton } from "styles/components/Button";
 
@@ -49,8 +50,9 @@ const DashboardTable = ({ data = [] }) => {
 
   const handleAcceptClick = (e, item) => {
     e.preventDefault();
-    // setAnchorAcceptButton(null);
-    // acceptRequest(item.id, item.sender);
+    const { action, ...bookTemp } = item;
+
+    BookTempService.acceptPublishBook(bookTemp);
   };
 
   const handleCancelAcceptClick = (e) => {
@@ -60,8 +62,9 @@ const DashboardTable = ({ data = [] }) => {
 
   const handleRefuseClick = (e, item) => {
     e.preventDefault();
-    // setAnchorRefuseButton(null);
-    // refuseRequest(item.id, item.sender);
+    const { action, ...bookTemp } = item;
+
+    BookTempService.refusePublishBook(bookTemp);
   };
 
   const handleCancelRefuseClick = (e) => {
