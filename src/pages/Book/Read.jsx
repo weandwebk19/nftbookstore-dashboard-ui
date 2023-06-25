@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import { IToc, ReactReader } from "react-reader";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -70,7 +71,7 @@ const ReadBook = () => {
   const tocRef = useRef(null);
   const [fileType, setFileType] = useState("epub");
 
-  // const router = useRouter();
+  const navigate = useNavigate();
   // const { bookId } = router.query;
   // const { nftBookMeta } = useNftBookMeta(bookId);
   const [decrypting, setDecrypting] = useState(false);
@@ -256,9 +257,10 @@ const ReadBook = () => {
           sx={{ mb: 3 }}
           onClick={() => {
             // router.push("/account/bookshelf");
+            navigate("/dashboard");
           }}
         >
-          Return
+          Return to Dashboard
         </Button>
 
         {decrypting && (
