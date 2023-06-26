@@ -32,7 +32,7 @@ const StyledButton = styled(Button, {
     color: `${theme.palette.primary.main}`,
     border: `1px solid ${theme.palette.primary.main}`
   }),
-  ...(width == 100 && {
+  ...(width === 100 && {
     width: "100%"
   }),
   ...(customColor === "light" && {
@@ -46,14 +46,14 @@ const StyledButton = styled(Button, {
   }),
   ...(customVariant === "secondary" &&
     customColor === "light" && {
-      "&:hover": {
-        border: `1px solid ${theme.palette.common.white}`,
-        color: `${theme.palette.common.white}`
-      },
-      backgroundColor: "none",
-      color: `${theme.palette.common.white}`,
-      border: `1px solid ${theme.palette.common.white}`
-    })
+    "&:hover": {
+      border: `1px solid ${theme.palette.common.white}`,
+      color: `${theme.palette.common.white}`
+    },
+    backgroundColor: "none",
+    color: `${theme.palette.common.white}`,
+    border: `1px solid ${theme.palette.common.white}`
+  })
 }));
 
 export default StyledButton;

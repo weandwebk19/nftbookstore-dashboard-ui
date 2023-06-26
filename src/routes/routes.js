@@ -1,4 +1,5 @@
 import Login from "pages/Auth/login";
+import AuthorRequest from "pages/AuthorRequest";
 import Read from "pages/Book/Read";
 import Dashboard from "pages/Dashboard/Dashboard";
 
@@ -16,6 +17,9 @@ const publicRoutes = [
   { path: "/read/*", component: Read },
 ];
 // private Routes
-const privateRoutes = [{ path: "/dashboard/*", component: Dashboard }];
+const privateRoutes = [
+  { path: "/dashboard/*", component: Dashboard },
+  { path: "/author-request/*", component: AuthorRequest },
+];
 
 export { publicRoutes, privateRoutes };
