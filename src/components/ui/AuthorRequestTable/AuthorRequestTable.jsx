@@ -76,6 +76,7 @@ const AuthorRequestTable = ({ data = [] }) => {
     {
       field: "picture",
       headerName: "Avatar",
+      sortable: false,
       width: 120,
       renderCell: (params) => (
         <Box sx={{ p: 1, ml: -1 }}>
@@ -95,6 +96,7 @@ const AuthorRequestTable = ({ data = [] }) => {
     {
       field: "pseudonym",
       headerName: "Pseudonym",
+      sortable: false,
       width: 130,
       renderCell: (params) => (
         <Tooltip title={params.value}>
