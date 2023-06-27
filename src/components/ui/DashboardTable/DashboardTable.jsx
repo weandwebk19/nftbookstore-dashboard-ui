@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { IconButton, Stack, Tooltip, Typography } from "@mui/material";
@@ -175,7 +175,15 @@ const DashboardTable = ({ data = [] }) => {
               <IconButton
                 component="label"
                 onClick={() => {
-                  // navigate("/read/:bookId");
+                  navigate("/read", {
+                    state: {
+                      privateKey: params?.row?.privateKey,
+                      ivKey: params?.row?.ivKey,
+                      tokenId: params?.row?.tokenId,
+                      bookFileUrl: params?.row?.bookFile,
+                      fileType: params?.row?.fileType,
+                    },
+                  });
                 }}
               >
                 {params?.value?.read}

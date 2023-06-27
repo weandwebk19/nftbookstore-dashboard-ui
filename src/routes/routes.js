@@ -14,12 +14,12 @@ const publicRoutes = [
   { path: "/", component: Login },
   // { path: "/reset-password/*", component: ResetPassword },
   { path: "/confirmation/*", component: Confirmation },
-  { path: "/read/*", component: Read },
 ];
 // private Routes
 const privateRoutes = [
   { path: "/dashboard/*", component: Dashboard },
   { path: "/author-request/*", component: AuthorRequest },
+  { path: "/read/*", component: Read },
 ];
 
 export { publicRoutes, privateRoutes };
