@@ -1,23 +1,16 @@
 /* eslint-disable no-unused-vars */
 import * as React from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import {
-  Box,
-  Button,
-  IconButton,
-  Stack,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { IconButton, Stack, Tooltip, Typography } from "@mui/material";
 
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 
 import BookTempService from "services/bookTempService";
-// import { DataGrid } from "@mui/x-data-grid";
 import { StyledButton } from "styles/components/Button";
 
 import DataGrid from "components/shared/DataGrid/DataGrid";
@@ -28,6 +21,7 @@ import { Dialog } from "../../shared/Dialog";
 
 // eslint-disable-next-line react/prop-types
 const DashboardTable = ({ data = [] }) => {
+  const navigate = useNavigate();
   const [targetItem, setTargetItem] = React.useState([]);
 
   const [anchorAcceptButton, setAnchorAcceptButton] = React.useState(null);
@@ -181,7 +175,7 @@ const DashboardTable = ({ data = [] }) => {
               <IconButton
                 component="label"
                 onClick={() => {
-                  // router.push("");
+                  // navigate("/read/:bookId");
                 }}
               >
                 {params?.value?.read}
@@ -233,7 +227,7 @@ const DashboardTable = ({ data = [] }) => {
           </Typography>
           <Stack direction={{ xs: "column" }} spacing={{ xs: 1 }}>
             <Typography variant="body1">
-              <b>title:</b> {targetItem?.title}
+              <b>Title:</b> {targetItem?.title}
             </Typography>
             <Typography variant="body1" className={styles.text__truncate}>
               <b>Book Sample:</b>{" "}
@@ -297,7 +291,7 @@ const DashboardTable = ({ data = [] }) => {
           </Typography>
           <Stack direction={{ xs: "column" }} spacing={{ xs: 1 }}>
             <Typography variant="body1">
-              <b>title:</b> {targetItem?.title}
+              <b>Title:</b> {targetItem?.title}
             </Typography>
             <Typography variant="body1" className={styles.text__truncate}>
               <b>Book Sample:</b>{" "}
