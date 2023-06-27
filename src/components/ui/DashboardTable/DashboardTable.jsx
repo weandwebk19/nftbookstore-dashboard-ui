@@ -210,8 +210,6 @@ const DashboardTable = ({ data = [] }) => {
     });
   }, [data]);
 
-  console.log("data:", data);
-
   return (
     <Stack spacing={3}>
       <DataGrid getRowId={(row) => row.tokenId} columns={columns} rows={data} />
