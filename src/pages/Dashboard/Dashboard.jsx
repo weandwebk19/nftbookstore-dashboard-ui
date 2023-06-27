@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { Box, CircularProgress, Grid, Paper } from "@mui/material";
 
+import { logout } from "redux/actions/auth";
 import BookTempService from "services/bookTempService";
+import { StyledButton } from "styles/components/Button";
 
 import { ContentContainer } from "../../components/shared/ContentContainer";
 import { DashboardTable } from "../../components/ui/DashboardTable";
@@ -34,6 +38,10 @@ const Dashboard = () => {
       timestamp: new Date("2023-06-20T06:22:36.732Z").getTime(),
     },
   ];
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [isLoading, setIsLoading] = useState(true);
   const [books, setBooks] = useState([]);
 
@@ -46,7 +54,31 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <ContentContainer titles={["Dashboard"]}>
+    <ContentContainer
+      titles={["Dashboard"]}
+      button={
+        <>
+          <StyledButton
+            customVariant="secondary"
+            onClick={() => {
+              navigate("/author-request");
+            }}
+          >
+            Author Request
+          </StyledButton>
+          <StyledButton
+            customVariant="secondary"
+            onClick={() => {
+              dispatch(logout());
+              navigate("/");
+            }}
+            style={{ marginLeft: "8px" }}
+          >
+            Log out
+          </StyledButton>
+        </>
+      }
+    >
       <Grid container columns={{ xs: 4, sm: 8, md: 12, lg: 12 }}>
         <Paper sx={{ p: 3, width: "100%" }}>
           {(() => {
