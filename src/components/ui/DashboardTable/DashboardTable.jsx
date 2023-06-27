@@ -51,8 +51,15 @@ const DashboardTable = ({ data = [] }) => {
   const handleAcceptClick = (e, item) => {
     e.preventDefault();
     const { action, ...bookTemp } = item;
-
-    BookTempService.acceptPublishBook(bookTemp);
+    (async () => {
+      const res = await BookTempService.acceptPublishBook(bookTemp);
+      if (res) {
+        toast.success("Successfully.");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    })();
   };
 
   const handleCancelAcceptClick = (e) => {
@@ -64,7 +71,15 @@ const DashboardTable = ({ data = [] }) => {
     e.preventDefault();
     const { action, ...bookTemp } = item;
 
-    BookTempService.refusePublishBook(bookTemp);
+    (async () => {
+      const res = await BookTempService.refusePublishBook(bookTemp);
+      if (res) {
+        toast.success("Successfully.");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    })();
   };
 
   const handleCancelRefuseClick = (e) => {
