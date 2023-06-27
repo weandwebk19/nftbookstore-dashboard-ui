@@ -74,6 +74,10 @@ const DashboardTable = ({ data = [] }) => {
     setAnchorRefuseButton(null);
   };
 
+  const handleClickNewTab = (url) => {
+    window.open(url, "_blank", "noreferrer");
+  };
+
   const columns = [
     {
       field: "title",
@@ -94,7 +98,11 @@ const DashboardTable = ({ data = [] }) => {
       width: 180,
       renderCell: (params) => (
         <Tooltip title={params.value}>
-          <Typography className={styles.text__truncate}>
+          <Typography
+            className={styles.text__truncate}
+            style={{ cursor: "pointer" }}
+            onClick={() => handleClickNewTab(params.value)}
+          >
             {params.value}
           </Typography>
         </Tooltip>
@@ -107,7 +115,11 @@ const DashboardTable = ({ data = [] }) => {
       width: 180,
       renderCell: (params) => (
         <Tooltip title={params.value}>
-          <Typography className={styles.text__truncate}>
+          <Typography
+            className={styles.text__truncate}
+            style={{ cursor: "pointer" }}
+            onClick={() => handleClickNewTab(params.value)}
+          >
             {params.value}
           </Typography>
         </Tooltip>
@@ -197,6 +209,8 @@ const DashboardTable = ({ data = [] }) => {
       };
     });
   }, [data]);
+
+  console.log("data:", data);
 
   return (
     <Stack spacing={3}>

@@ -72,6 +72,10 @@ const AuthorRequestTable = ({ data = [] }) => {
     setAnchorRefuseButton(null);
   };
 
+  const handleClickNewTab = (url) => {
+    window.open(url, "_blank", "noreferrer");
+  };
+
   const columns = [
     {
       field: "picture",
@@ -163,7 +167,11 @@ const AuthorRequestTable = ({ data = [] }) => {
       sortable: false,
       renderCell: (params) => (
         <Tooltip title={params.value}>
-          <Typography className={styles.text__truncate}>
+          <Typography
+            className={styles.text__truncate}
+            style={{ cursor: "pointer" }}
+            onClick={() => handleClickNewTab(params.value)}
+          >
             {params.value}
           </Typography>
         </Tooltip>
@@ -177,7 +185,11 @@ const AuthorRequestTable = ({ data = [] }) => {
       sortable: false,
       renderCell: (params) => (
         <Tooltip title={params.value}>
-          <Typography className={styles.text__truncate}>
+          <Typography
+            className={styles.text__truncate}
+            style={{ cursor: "pointer" }}
+            onClick={() => handleClickNewTab(params.value)}
+          >
             {params.value}
           </Typography>
         </Tooltip>
@@ -191,7 +203,11 @@ const AuthorRequestTable = ({ data = [] }) => {
       sortable: false,
       renderCell: (params) => (
         <Tooltip title={params.value}>
-          <Typography className={styles.text__truncate}>
+          <Typography
+            className={styles.text__truncate}
+            style={{ cursor: "pointer" }}
+            onClick={() => handleClickNewTab(params.value)}
+          >
             {params.value}
           </Typography>
         </Tooltip>
@@ -205,7 +221,11 @@ const AuthorRequestTable = ({ data = [] }) => {
       sortable: false,
       renderCell: (params) => (
         <Tooltip title={params.value}>
-          <Typography className={styles.text__truncate}>
+          <Typography
+            className={styles.text__truncate}
+            style={{ cursor: "pointer" }}
+            onClick={() => handleClickNewTab(params.value)}
+          >
             {params.value}
           </Typography>
         </Tooltip>
@@ -219,7 +239,11 @@ const AuthorRequestTable = ({ data = [] }) => {
       sortable: false,
       renderCell: (params) => (
         <Tooltip title={params.value}>
-          <Typography className={styles.text__truncate}>
+          <Typography
+            className={styles.text__truncate}
+            style={{ cursor: "pointer" }}
+            onClick={() => handleClickNewTab(params.value)}
+          >
             {params.value}
           </Typography>
         </Tooltip>
