@@ -1856,7 +1856,7 @@
     csstype "^3.1.2"
     prop-types "^15.8.1"
 
-"@mui/system@^5.13.5", "@mui/system@^5.4.1":
+"@mui/system@^5.13.5", "@mui/system@^5.13.6", "@mui/system@^5.4.1":
   version "5.13.6"
   resolved "https://registry.npmjs.org/@mui/system/-/system-5.13.6.tgz"
   integrity sha512-G3Xr28uLqU3DyF6r2LQkHGw/ku4P0AHzlKVe7FGXOPl7X1u+hoe2xxj8Vdiq/69II/mh9OP21i38yBWgWb7WgQ==

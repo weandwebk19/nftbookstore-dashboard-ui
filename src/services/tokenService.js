@@ -1,9 +1,9 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "redux/actions/types";
-import { store } from "redux/store";
 
 import config from "../config";
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../redux/actions/types";
+import { store } from "../redux/store";
 
 const getRefreshToken = async () => {
   try {

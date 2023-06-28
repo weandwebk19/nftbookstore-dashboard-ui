@@ -9,13 +9,14 @@ import {
   Container,
   CssBaseline,
   Grid,
-  Link,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
 
 import { login } from "../../../redux/actions/auth";
+
+// import GoogleAuthButton from "./GoogleAuthButton";
 
 const LoginForm = () => {
   const [isError, setIsError] = useState("");
@@ -78,10 +79,11 @@ const LoginForm = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
+            p: 3,
           }}
         >
           <Typography variant="h3" gutterBottom>
-            log in.
+            Log in
           </Typography>
           <Box
             component="form"
@@ -170,7 +172,7 @@ const LoginForm = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Button type="submit" fullWidth variant="primary" sx={{ mt: 6 }}>
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 6 }}>
               Log In
             </Button>
             {/* <Typography sx={{ mt: 4, mb: 4, textAlign: "center" }}>
@@ -184,9 +186,9 @@ const LoginForm = () => {
               sx={{ mt: 6 }}
             >
               <Grid item>
-                <Link href="/register" variant="body2">
+                {/* <Link href="/register" variant="body2">
                   Don&apos;t have an account? <b>sign up</b>
-                </Link>
+                </Link> */}
               </Grid>
             </Grid>
           </Box>

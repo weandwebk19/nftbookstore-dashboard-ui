@@ -1,23 +1,19 @@
 /* eslint-disable no-unused-vars */
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import {
-  Box,
-  Button,
-  IconButton,
-  Stack,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { IconButton, Stack, Tooltip, Typography } from "@mui/material";
 
-import { PhotoCamera } from "@mui/icons-material";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 
-import { DataGrid } from "@mui/x-data-grid";
+import BookTempService from "services/bookTempService";
+import { StyledButton } from "styles/components/Button";
+
+import DataGrid from "components/shared/DataGrid/DataGrid";
 
 import styles from "../../../styles/Dashboard.module.scss";
 import { truncate } from "../../../utils/truncate";
@@ -25,6 +21,7 @@ import { Dialog } from "../../shared/Dialog";
 
 // eslint-disable-next-line react/prop-types
 const DashboardTable = ({ data = [] }) => {
+  const navigate = useNavigate();
   const [targetItem, setTargetItem] = React.useState([]);
 
   const [anchorAcceptButton, setAnchorAcceptButton] = React.useState(null);
@@ -47,8 +44,16 @@ const DashboardTable = ({ data = [] }) => {
 
   const handleAcceptClick = (e, item) => {
     e.preventDefault();
-    // setAnchorAcceptButton(null);
-    // acceptRequest(item.id, item.sender);
+    const { action, ...bookTemp } = item;
+    (async () => {
+      const res = await BookTempService.acceptPublishBook(bookTemp);
+      if (res) {
+        toast.success("Successfully.");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    })();
   };
 
   const handleCancelAcceptClick = (e) => {
@@ -58,8 +63,17 @@ const DashboardTable = ({ data = [] }) => {
 
   const handleRefuseClick = (e, item) => {
     e.preventDefault();
-    // setAnchorRefuseButton(null);
-    // refuseRequest(item.id, item.sender);
+    const { action, ...bookTemp } = item;
+
+    (async () => {
+      const res = await BookTempService.refusePublishBook(bookTemp);
+      if (res) {
+        toast.success("Successfully.");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    })();
   };
 
   const handleCancelRefuseClick = (e) => {
@@ -73,6 +87,10 @@ const DashboardTable = ({ data = [] }) => {
 
   const handleRefuseClose = () => {
     setAnchorRefuseButton(null);
+  };
+
+  const handleClickNewTab = (url) => {
+    window.open(url, "_blank", "noreferrer");
   };
 
   const columns = [
@@ -95,7 +113,11 @@ const DashboardTable = ({ data = [] }) => {
       width: 180,
       renderCell: (params) => (
         <Tooltip title={params.value}>
-          <Typography className={styles.text__truncate}>
+          <Typography
+            className={styles.text__truncate}
+            style={{ cursor: "pointer" }}
+            onClick={() => handleClickNewTab(params.value)}
+          >
             {params.value}
           </Typography>
         </Tooltip>
@@ -108,7 +130,11 @@ const DashboardTable = ({ data = [] }) => {
       width: 180,
       renderCell: (params) => (
         <Tooltip title={params.value}>
-          <Typography className={styles.text__truncate}>
+          <Typography
+            className={styles.text__truncate}
+            style={{ cursor: "pointer" }}
+            onClick={() => handleClickNewTab(params.value)}
+          >
             {params.value}
           </Typography>
         </Tooltip>
@@ -161,7 +187,15 @@ const DashboardTable = ({ data = [] }) => {
               <IconButton
                 component="label"
                 onClick={() => {
-                  // router.push("");
+                  navigate("/read", {
+                    state: {
+                      privateKey: params?.row?.privateKey,
+                      ivKey: params?.row?.ivKey,
+                      tokenId: params?.row?.tokenId,
+                      bookFileUrl: params?.row?.bookFile,
+                      fileType: params?.row?.fileType,
+                    },
+                  });
                 }}
               >
                 {params?.value?.read}
@@ -201,45 +235,7 @@ const DashboardTable = ({ data = [] }) => {
 
   return (
     <Stack spacing={3}>
-      <Box
-        sx={{
-          width: "100%",
-          "& .MuiDataGrid-columnHeaders": {
-            height: "50px",
-          },
-          "& .MuiDataGrid-columnSeparator": {
-            display: "none",
-          },
-          "& .MuiDataGrid-columnHeaderTitle": {
-            lineHeight: "1.5 !important",
-            fontWeight: "bold",
-          },
-          "& .MuiDataGrid-cell:focus": {
-            outline: "none !important",
-          },
-          "& .MuiDataGrid-cell:focus-within": {
-            outline: "none !important",
-          },
-        }}
-      >
-        <DataGrid
-          getRowId={(row) => row.tokenId}
-          columns={columns}
-          rows={data}
-          autoHeight
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 10,
-              },
-            },
-          }}
-          pageSizeOptions={[10]}
-          checkboxSelection
-          disableRowSelectionOnClick
-          getRowHeight={() => "auto"}
-        />
-      </Box>
+      <DataGrid getRowId={(row) => row.tokenId} columns={columns} rows={data} />
       <Dialog
         title="Accept the request"
         open={openAcceptDialog}
@@ -251,7 +247,7 @@ const DashboardTable = ({ data = [] }) => {
           </Typography>
           <Stack direction={{ xs: "column" }} spacing={{ xs: 1 }}>
             <Typography variant="body1">
-              <b>title:</b> {targetItem?.title}
+              <b>Title:</b> {targetItem?.title}
             </Typography>
             <Typography variant="body1" className={styles.text__truncate}>
               <b>Book Sample:</b>{" "}
@@ -292,15 +288,15 @@ const DashboardTable = ({ data = [] }) => {
             </Typography>
           </Stack>
           <Stack direction="row" spacing={3} justifyContent="end">
-            <Button
+            <StyledButton
               customVariant="secondary"
               onClick={(e) => handleCancelAcceptClick(e)}
             >
               Cancel
-            </Button>
-            <Button onClick={(e) => handleAcceptClick(e, targetItem)}>
+            </StyledButton>
+            <StyledButton onClick={(e) => handleAcceptClick(e, targetItem)}>
               Accept
-            </Button>
+            </StyledButton>
           </Stack>
         </Stack>
       </Dialog>
@@ -315,7 +311,7 @@ const DashboardTable = ({ data = [] }) => {
           </Typography>
           <Stack direction={{ xs: "column" }} spacing={{ xs: 1 }}>
             <Typography variant="body1">
-              <b>title:</b> {targetItem?.title}
+              <b>Title:</b> {targetItem?.title}
             </Typography>
             <Typography variant="body1" className={styles.text__truncate}>
               <b>Book Sample:</b>{" "}
@@ -356,15 +352,15 @@ const DashboardTable = ({ data = [] }) => {
             </Typography>
           </Stack>
           <Stack direction="row" spacing={3} justifyContent="end">
-            <Button
+            <StyledButton
               customVariant="secondary"
               onClick={(e) => handleCancelRefuseClick(e)}
             >
               Cancel
-            </Button>
-            <Button onClick={(e) => handleRefuseClick(e, targetItem)}>
+            </StyledButton>
+            <StyledButton onClick={(e) => handleRefuseClick(e, targetItem)}>
               Refuse
-            </Button>
+            </StyledButton>
           </Stack>
         </Stack>
       </Dialog>
