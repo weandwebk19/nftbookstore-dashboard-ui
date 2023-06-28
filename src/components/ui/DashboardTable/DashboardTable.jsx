@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { IconButton, Stack, Tooltip, Typography } from "@mui/material";
@@ -45,8 +45,15 @@ const DashboardTable = ({ data = [] }) => {
   const handleAcceptClick = (e, item) => {
     e.preventDefault();
     const { action, ...bookTemp } = item;
-
-    BookTempService.acceptPublishBook(bookTemp);
+    (async () => {
+      const res = await BookTempService.acceptPublishBook(bookTemp);
+      if (res) {
+        toast.success("Successfully.");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    })();
   };
 
   const handleCancelAcceptClick = (e) => {
@@ -58,7 +65,15 @@ const DashboardTable = ({ data = [] }) => {
     e.preventDefault();
     const { action, ...bookTemp } = item;
 
-    BookTempService.refusePublishBook(bookTemp);
+    (async () => {
+      const res = await BookTempService.refusePublishBook(bookTemp);
+      if (res) {
+        toast.success("Successfully.");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    })();
   };
 
   const handleCancelRefuseClick = (e) => {
@@ -172,7 +187,15 @@ const DashboardTable = ({ data = [] }) => {
               <IconButton
                 component="label"
                 onClick={() => {
-                  // navigate("/read/:bookId");
+                  navigate("/read", {
+                    state: {
+                      privateKey: params?.row?.privateKey,
+                      ivKey: params?.row?.ivKey,
+                      tokenId: params?.row?.tokenId,
+                      bookFileUrl: params?.row?.bookFile,
+                      fileType: params?.row?.fileType,
+                    },
+                  });
                 }}
               >
                 {params?.value?.read}

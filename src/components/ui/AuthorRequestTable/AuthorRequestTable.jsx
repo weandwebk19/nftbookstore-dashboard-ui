@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import * as React from "react";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { IconButton, Stack, Tooltip, Typography } from "@mui/material";
@@ -9,6 +9,7 @@ import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
 import { Box } from "@mui/system";
+import authorRequestService from "services/authorRequestService";
 import BookTempService from "services/bookTempService";
 import { StyledButton } from "styles/components/Button";
 
@@ -42,9 +43,17 @@ const AuthorRequestTable = ({ data = [] }) => {
 
   const handleAcceptClick = (e, item) => {
     e.preventDefault();
-    const { action, ...bookTemp } = item;
+    const { action, ...authorInfo } = item;
 
-    BookTempService.acceptPublishBook(bookTemp);
+    (async () => {
+      const res = await authorRequestService.acceptBecomeAuthor(authorInfo);
+      if (res) {
+        toast.success("Successfully.");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    })();
   };
 
   const handleCancelAcceptClick = (e) => {
@@ -54,9 +63,17 @@ const AuthorRequestTable = ({ data = [] }) => {
 
   const handleRefuseClick = (e, item) => {
     e.preventDefault();
-    const { action, ...bookTemp } = item;
+    const { action, ...authorInfo } = item;
 
-    BookTempService.refusePublishBook(bookTemp);
+    (async () => {
+      const res = await authorRequestService.refuseBecomeAuthor(authorInfo);
+      if (res) {
+        toast.success("Successfully.");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    })();
   };
 
   const handleCancelRefuseClick = (e) => {
@@ -85,8 +102,8 @@ const AuthorRequestTable = ({ data = [] }) => {
       renderCell: (params) => (
         <Box sx={{ p: 1, ml: -1 }}>
           <img
-            src={params.value?.secure_url}
-            alt={params.value?.secure_url}
+            src={params.value?.secureUrl}
+            alt={params.value?.secureUrl}
             style={{
               flexShrink: 0,
               aspectRatio: "3 / 2",
